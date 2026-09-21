@@ -102,7 +102,11 @@ function Profile() {
 
       console.log("Profile response:", profileResult);
 
-      const profileId = profileResult.profile_id;
+      const profileId = profileResult.profile?.id;
+
+      if (!profileId) {
+        throw new Error("Profile response did not include an id");
+      }
 
       if (resume) {
         const formData = new FormData();
